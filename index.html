@@ -207,23 +207,17 @@
     position: relative;
     overflow: hidden;
   }
-  .hero-visual {
+  .hero-monogram-panel {
     position: absolute;
     inset: 0;
-    background: var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    opacity: 0.06;
-    background-image:
-      linear-gradient(var(--cream) 1px, transparent 1px),
-      linear-gradient(90deg, var(--cream) 1px, transparent 1px);
-    background-size: 40px 40px;
+  .monogram-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .hero-circle {
     width: 380px; height: 380px;
@@ -844,6 +838,14 @@
     .contact h2 { font-size: 2.2rem; }
     .contact-email { font-size: 1.1rem; word-break: break-all; }
   }
+
+  
+
+  @media (max-width: 900px) {
+    .hero-type-block { padding: 2rem 1.5rem; padding-bottom: 8rem; }
+    .ht-line-1, .ht-line-3 { font-size: 2.8rem; }
+    .ht-line-2 { font-size: 3.5rem; }
+  }
 </style>
 </head>
 <body>
@@ -859,7 +861,16 @@
     <li><a href="#work">Work</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#work" class="mobile-link">Work</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
 
 <!-- Hero -->
 <section class="hero" id="home">
@@ -877,22 +888,100 @@
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-visual">
-      <div class="hero-grid"></div>
-      <div class="hero-circle"></div>
-      <div class="hero-circle"></div>
-      <div class="hero-circle"></div>
-      <div class="hero-initials">IT</div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num">3+</div>
-          <div class="hero-stat-label">years designing</div>
-        </div>
-        <div class="hero-stat" style="padding-left:2rem;">
-          <div class="hero-stat-num">2</div>
-          <div class="hero-stat-label">languages</div>
-        </div>
-      </div>
+    <div class="hero-monogram-panel">
+      <svg class="monogram-svg" viewBox="0 0 560 700" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="warmglow" cx="50%" cy="48%" r="52%">
+            <stop offset="0%" stop-color="#F7EFD8"/>
+            <stop offset="100%" stop-color="#EDE7D6"/>
+          </radialGradient>
+          <radialGradient id="centerglow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="softblur">
+            <feGaussianBlur stdDeviation="18"/>
+          </filter>
+        </defs>
+
+        <!-- Warm cream background -->
+        <rect width="560" height="700" fill="url(#warmglow)"/>
+
+        <!-- Soft center glow -->
+        <ellipse cx="280" cy="340" rx="220" ry="200" fill="url(#centerglow)" filter="url(#softblur)"/>
+
+        <!-- Outer decorative rings - soft gold -->
+        <circle cx="280" cy="340" r="200" stroke="#C9A84C" stroke-width="0.6" fill="none" opacity="0.18"/>
+        <circle cx="280" cy="340" r="185" stroke="#C9A84C" stroke-width="0.3" fill="none" opacity="0.1"/>
+
+        <!-- Decorative corner flourishes -->
+        <path d="M 60 60 Q 60 40 80 40" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M 60 60 Q 40 60 40 80" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M 500 60 Q 500 40 480 40" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M 500 60 Q 520 60 520 80" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M 60 640 Q 60 660 80 660" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M 60 640 Q 40 640 40 620" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M 500 640 Q 500 660 480 660" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M 500 640 Q 520 640 520 620" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.35"/>
+
+        <!-- Small diamond accents at compass points -->
+        <polygon points="280,132 284,140 280,148 276,140" fill="#C9A84C" opacity="0.3"/>
+        <polygon points="480,340 488,344 480,348 472,344" fill="#C9A84C" opacity="0.3"/>
+        <polygon points="280,532 284,540 280,548 276,540" fill="#C9A84C" opacity="0.3"/>
+        <polygon points="80,340 88,344 80,348 72,344" fill="#C9A84C" opacity="0.3"/>
+
+        <!-- The I — elegant serif stroke -->
+        <!-- Vertical stem -->
+        <rect x="236" y="220" width="2.5" height="140" fill="#C9A84C" opacity="0.85" rx="1"/>
+        <!-- Top serif -->
+        <rect x="222" y="220" width="30" height="2" fill="#C9A84C" opacity="0.85" rx="1"/>
+        <!-- Bottom serif -->
+        <rect x="222" y="358" width="30" height="2" fill="#C9A84C" opacity="0.85" rx="1"/>
+
+        <!-- The T — elegant serif stroke -->
+        <!-- Vertical stem -->
+        <rect x="306" y="248" width="2.5" height="112" fill="#2C2B28" opacity="0.55" rx="1"/>
+        <!-- Top crossbar -->
+        <rect x="285" y="248" width="46" height="2" fill="#2C2B28" opacity="0.55" rx="1"/>
+        <!-- Top serif on crossbar ends -->
+        <rect x="285" y="244" width="2" height="10" fill="#2C2B28" opacity="0.35" rx="1"/>
+        <rect x="329" y="244" width="2" height="10" fill="#2C2B28" opacity="0.35" rx="1"/>
+        <!-- Bottom serif on T stem -->
+        <rect x="298" y="358" width="18" height="2" fill="#2C2B28" opacity="0.45" rx="1"/>
+
+        <!-- Italic flourish underline -->
+        <path d="M 210 390 Q 280 382 350 390" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M 215 396 Q 280 389 345 396" stroke="#C9A84C" stroke-width="0.4" fill="none" opacity="0.25"/>
+
+        <!-- Tiny star/sparkle accents -->
+        <g opacity="0.4" transform="translate(168, 280)">
+          <line x1="0" y1="-6" x2="0" y2="6" stroke="#C9A84C" stroke-width="0.8"/>
+          <line x1="-6" y1="0" x2="6" y2="0" stroke="#C9A84C" stroke-width="0.8"/>
+          <line x1="-4" y1="-4" x2="4" y2="4" stroke="#C9A84C" stroke-width="0.5"/>
+          <line x1="4" y1="-4" x2="-4" y2="4" stroke="#C9A84C" stroke-width="0.5"/>
+        </g>
+        <g opacity="0.25" transform="translate(392, 420)">
+          <line x1="0" y1="-5" x2="0" y2="5" stroke="#C9A84C" stroke-width="0.8"/>
+          <line x1="-5" y1="0" x2="5" y2="0" stroke="#C9A84C" stroke-width="0.8"/>
+          <line x1="-3" y1="-3" x2="3" y2="3" stroke="#C9A84C" stroke-width="0.5"/>
+          <line x1="3" y1="-3" x2="-3" y2="3" stroke="#C9A84C" stroke-width="0.5"/>
+        </g>
+        <g opacity="0.2" transform="translate(420, 240)">
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="#C9A84C" stroke-width="0.8"/>
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="#C9A84C" stroke-width="0.8"/>
+        </g>
+
+        <!-- Bottom label -->
+        <text x="280" y="620" font-family="DM Mono, monospace" font-size="8.5" fill="#C9A84C" opacity="0.5" text-anchor="middle" letter-spacing="4">INÊS TOVAR</text>
+        <text x="280" y="636" font-family="DM Mono, monospace" font-size="7" fill="#5A5850" opacity="0.4" text-anchor="middle" letter-spacing="2.5">DESIGN · CONTENT · STRATEGY</text>
+
+        <!-- Tiny dot accents scattered softly -->
+        <circle cx="160" cy="180" r="1.2" fill="#C9A84C" opacity="0.25"/>
+        <circle cx="400" cy="160" r="1" fill="#C9A84C" opacity="0.2"/>
+        <circle cx="420" cy="500" r="1.5" fill="#C9A84C" opacity="0.2"/>
+        <circle cx="150" cy="480" r="1" fill="#C9A84C" opacity="0.18"/>
+        <circle cx="340" cy="130" r="1.2" fill="#C9A84C" opacity="0.2"/>
+      </svg>
     </div>
   </div>
 </section>
@@ -1082,35 +1171,7 @@
   </div>
 </section>
 
-<!-- Social proof -->
-<section class="proof">
-  <div class="proof-inner">
-    <div class="section-label fade-in">Kind words</div>
-    <h2 class="fade-in">What people<br><em>say.</em></h2>
-    <div class="proof-grid">
-      <div class="proof-card fade-in">
-        <p>Inês has a rare ability to understand a product deeply and translate that into content that actually makes sense to real users. She delivered faster than expected and the quality was excellent.</p>
-        <div class="proof-author">
-          <div class="author-avatar">TL</div>
-          <div>
-            <div class="author-name">The Loop co.</div>
-            <div class="author-role">Marketing & Design · Coimbra</div>
-          </div>
-        </div>
-      </div>
-      <div class="proof-card fade-in">
-        <p>Working with Inês on our podcast visual identity was seamless. She understood the tone we wanted immediately and delivered assets that we still use consistently across every episode.</p>
-        <div class="proof-author">
-          <div class="author-avatar">LL</div>
-          <div>
-            <div class="author-name">Lado a Lado Podcast</div>
-            <div class="author-role">Brand Identity Project</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- Contact -->
 <section class="contact" id="contact">
@@ -1132,7 +1193,7 @@
 </section>
 
 <footer>
-  <span>© 2025 Inês Tovar. All rights reserved.</span>
+  <span>© 2026 Inês Tovar. All rights reserved.</span>
   <span>Coimbra, Portugal · Available worldwide</span>
 </footer>
 
@@ -1155,6 +1216,21 @@
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
   });
 
   const faders = document.querySelectorAll('.fade-in');
